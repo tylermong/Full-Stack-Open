@@ -3,20 +3,16 @@ import { useState } from 'react'
 const App = () => {
   const [ counter, setCounter ] = useState(0)
 
-  const handleClick = () => {
-    console.log('clicked')
-  }
-
-  console.log('rendering...', counter)
+  const increaseByOne = () => setCounter(counter + 1)
+  const setToZero = () => setCounter(0)
 
   return (
     <>
         <div>{counter}</div>
-        {/* <button onClick={handleClick}>plus</button> */}
-        <button onClick={() => setCounter(counter + 1)}>
+        <button onClick={increaseByOne}>
             plus
         </button>
-        <button onClick={() => setCounter(0)}>
+        <button onClick={setToZero}>
             zero
         </button>
     </>
