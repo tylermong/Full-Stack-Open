@@ -27,7 +27,8 @@ const App = () => {
       <Button onClick={() => addReview("good")} text="good" />
       <Button onClick={() => addReview("neutral")} text="neutral" />
       <Button onClick={() => addReview("bad")} text="bad" />
-      
+
+      <h1>statistics</h1>
       <Statistics good={good} neutral={neutral} bad={bad}/>
     </div>
   )
