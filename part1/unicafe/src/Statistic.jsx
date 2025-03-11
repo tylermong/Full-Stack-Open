@@ -1,9 +1,3 @@
-
-
-const calculateAverage = (props) => {
-    return (good + neutral + bad) / 3
-}
-
 const Statistics = ({ good, neutral, bad }) => {
     let total = good + neutral + bad
 
