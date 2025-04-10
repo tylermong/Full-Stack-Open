@@ -14,7 +14,7 @@ const Content = ({ content }) => {
   )
 }
 
-const Part = ({ id, name, exercises }) => {
+const Part = ({ name, exercises }) => {
   return (
     <p>
       {name} {exercises}
@@ -22,11 +22,24 @@ const Part = ({ id, name, exercises }) => {
   )
 }
 
+const Total = ({ exercises }) => {
+    let totalExercises = 0
+
+    exercises.forEach(part => {
+        totalExercises += part.exercises
+    })
+
+    return (
+        <p><strong>total of {totalExercises} exercises</strong></p>
+    )
+}
+
 const Course = ({ course }) => {
   return (
     <>
       <Header name={course.name} />
       <Content content={course.parts} />
+      <Total exercises={course.parts} />
     </>
   )
 }
