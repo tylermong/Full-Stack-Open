@@ -23,7 +23,6 @@ const Part = ({ id, name, exercises }) => {
 }
 
 const Course = ({ course }) => {
-  console.log(course)
   return (
     <>
       <Header name={course.name} />
