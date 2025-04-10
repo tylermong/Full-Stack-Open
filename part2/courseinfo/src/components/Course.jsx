@@ -1,5 +1,7 @@
 const Header = ({ name }) => {
-  return <h2>{name}</h2>;
+  return (
+    <h2>{name}</h2>
+  );
 };
 
 const Content = ({ content }) => {
@@ -21,10 +23,7 @@ const Part = ({ name, exercises }) => {
 };
 
 const Total = ({ exercises }) => {
-  const totalExercises = exercises.reduce(
-    (total, currentPart) => total + currentPart.exercises,
-    0
-  );
+  const totalExercises = exercises.reduce((total, currentPart) => total + currentPart.exercises, 0);
 
   return (
     <p>
