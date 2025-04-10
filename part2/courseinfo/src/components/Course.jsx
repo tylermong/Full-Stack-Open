@@ -1,8 +1,6 @@
 const Header = ({ name }) => {
-  return (
-    <h1>{name}</h1>
-  )
-}
+  return <h2>{name}</h2>;
+};
 
 const Content = ({ content }) => {
   return (
@@ -11,33 +9,43 @@ const Content = ({ content }) => {
         <Part key={part.id} name={part.name} exercises={part.exercises} />
       ))}
     </>
-  )
-}
+  );
+};
 
 const Part = ({ name, exercises }) => {
   return (
     <p>
       {name} {exercises}
     </p>
-  )
-}
+  );
+};
 
 const Total = ({ exercises }) => {
-    const totalExercises = exercises.reduce((total, currentPart) => total + currentPart.exercises, 0)
+  const totalExercises = exercises.reduce(
+    (total, currentPart) => total + currentPart.exercises,
+    0
+  );
 
-    return (
-        <p><strong>total of {totalExercises} exercises</strong></p>
-    )
-}
+  return (
+    <p>
+      <strong>total of {totalExercises} exercises</strong>
+    </p>
+  );
+};
 
-const Course = ({ course }) => {
+const Course = ({ courses }) => {
   return (
     <>
-      <Header name={course.name} />
-      <Content content={course.parts} />
-      <Total exercises={course.parts} />
+      <h1>Web development curriculum</h1>
+      {courses.map((course) => (
+        <>
+          <Header name={course.name} />
+          <Content content={course.parts} />
+          <Total exercises={course.parts} />
+        </>
+      ))}
     </>
-  )
-}
+  );
+};
 
-export default Course
+export default Course;
