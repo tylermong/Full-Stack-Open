@@ -8,23 +8,23 @@ const App = () => {
     event.preventDefault();
     const nameObject = {
       name: newName,
-    }
+    };
 
-    if (persons.some(p => p.name === newName)) {
-      console.log(newName, " exists")
-      alert(`${newName} is already added to phonebook`)
+    if (persons.some((p) => p.name === newName)) {
+      console.log(newName, " exists");
+      alert(`${newName} is already added to phonebook`);
       setNewName("");
       return;
     }
 
     setPersons(persons.concat(nameObject));
     setNewName("");
-  }
+  };
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
     setNewName(event.target.value);
-  }
+  };
 
   return (
     <div>
@@ -39,9 +39,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons.map((person) => (
-        <div key={person.name}>
-          {person.name}
-        </div>
+        <div key={person.name}>{person.name}</div>
       ))}
     </div>
   );
