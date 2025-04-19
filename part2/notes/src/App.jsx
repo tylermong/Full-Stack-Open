@@ -7,7 +7,7 @@ const App = () => {
   const [newNote, setNewNote] = useState("a new note...");
   const [showAll, setShowAll] = useState(false);
 
-  const hook = () => {
+  useEffect(() => {
     console.log("effect");
     axios
       .get("http://localhost:3001/notes")
@@ -15,9 +15,8 @@ const App = () => {
         console.log("promise fulfilled");
         setNotes(response.data);
     });
-  };
+  }, []);
   console.log("render", notes.length, "notes");
-  useEffect(hook, [])
 
   const addNote = (event) => {
     event.preventDefault();
