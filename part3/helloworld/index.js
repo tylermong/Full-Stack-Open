@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 let notes = [
   {
     id: "1",
@@ -19,14 +21,17 @@ let notes = [
   },
 ];
 
+// home page
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
 });
 
+// endpoint to get all notes
 app.get("/api/notes", (request, response) => {
   response.json(notes);
 });
 
+// endpoint to get a note by id
 app.get("/api/notes/:id", (request, response) => {
   const id = request.params.id;
   const note = notes.find((note) => note.id === id);
@@ -38,11 +43,19 @@ app.get("/api/notes/:id", (request, response) => {
   }
 });
 
+// endpoint to delete a note by id
 app.delete("/api/notes/:id", (request, response) => {
   const id = request.params.id;
   notes = notes.filter((note) => note.id !== id);
 
   response.status(204).end();
+});
+
+
+app.post("/api/notes", (request, response) => {
+  const note = request.body;
+  console.log(note);
+  response.json(note);
 });
 
 const PORT = 3001;
