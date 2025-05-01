@@ -7,7 +7,8 @@ const PersonForm = ({
   setNewNumber,
   persons,
   setPersons,
-  setSuccessMessage
+  setNotification,
+  setType
 }) => {
   const addPerson = (event) => {
     event.preventDefault();
@@ -25,10 +26,19 @@ const PersonForm = ({
           .update(currentPerson.id, changedContact)
           .then((returnedPerson) => {
             setPersons(persons.map((person) => (person.id !== currentPerson.id) ? person : returnedPerson))
-            setSuccessMessage(`Updated ${returnedPerson.name}'s number`);
+            setNotification(`Updated ${returnedPerson.name}'s number`);
             setTimeout(() => {
-              setSuccessMessage(null);
+              setNotification(null, null);
             }, 5000)
+          })
+          .catch((error) => {
+            setNotification(
+              `Information of ${currentPerson.name} has already been removed from server`);
+            setType(error)
+            setTimeout(() => {
+              setNotification(null, null);
+            }, 5000);
+            setPersons(persons.filter((person) => person.id !== currentPerson.id));
           });
       }
       
@@ -39,9 +49,9 @@ const PersonForm = ({
 
     personService.create(personObject).then((returnedPersons) => {
       setPersons(persons.concat(returnedPersons));
-      setSuccessMessage(`Added ${returnedPersons.name}`)
+      setNotification(`Added ${returnedPersons.name}`, success)
       setTimeout(() => {
-        setSuccessMessage(null);
+        setNotification(null, null);
       }, 5000)
       setNewName("");
       setNewNumber("");
