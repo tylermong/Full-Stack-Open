@@ -27,6 +27,7 @@ const PersonForm = ({
           .then((returnedPerson) => {
             setPersons(persons.map((person) => (person.id !== currentPerson.id) ? person : returnedPerson))
             setNotification(`Updated ${returnedPerson.name}'s number`);
+            setType("success")
             setTimeout(() => {
               setNotification(null, null);
             }, 5000)
@@ -34,7 +35,7 @@ const PersonForm = ({
           .catch((error) => {
             setNotification(
               `Information of ${currentPerson.name} has already been removed from server`);
-            setType(error)
+            setType("error")
             setTimeout(() => {
               setNotification(null, null);
             }, 5000);
