@@ -16,6 +16,24 @@ const App = () => {
     });
   }, []);
 
+  const deletePersonFromId = (id) => {
+    console.log("called")
+    const person = persons.find((person) => person.id === id);
+    console.log(person)
+
+    personService
+      .deletePerson(person.id)
+      .then((returnedPerson) => {
+        setPersons(
+          persons.map((person) => (person.id === id ? returnedPerson : person))
+        );
+      })
+      .catch(() => {
+        alert(`${person.name} was already deleted from server`);
+        setPersons(persons.filter((person) => person.id !== id));
+      });
+  };
+
   const personsToShow = search
     ? persons.filter((person) =>
         person.name.toLowerCase().includes(search.toLowerCase())
@@ -36,7 +54,10 @@ const App = () => {
         setPersons={setPersons}
       />
       <h2>Numbers</h2>
-      <Persons personsToShow={personsToShow} />
+      <Persons
+        personsToShow={personsToShow}
+        deletePerson={deletePersonFromId}
+      />
     </div>
   );
 };
