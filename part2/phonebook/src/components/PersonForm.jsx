@@ -7,6 +7,7 @@ const PersonForm = ({
   setNewNumber,
   persons,
   setPersons,
+  setSuccessMessage
 }) => {
   const addPerson = (event) => {
     event.preventDefault();
@@ -24,8 +25,13 @@ const PersonForm = ({
           .update(currentPerson.id, changedContact)
           .then((returnedPerson) => {
             setPersons(persons.map((person) => (person.id !== currentPerson.id) ? person : returnedPerson))
+            setSuccessMessage(`Updated ${returnedPerson.name}'s number`);
+            setTimeout(() => {
+              setSuccessMessage(null);
+            }, 5000)
           });
       }
+      
       setNewName("");
       setNewNumber("");
       return;
@@ -33,6 +39,10 @@ const PersonForm = ({
 
     personService.create(personObject).then((returnedPersons) => {
       setPersons(persons.concat(returnedPersons));
+      setSuccessMessage(`Added ${returnedPersons.name}`)
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 5000)
       setNewName("");
       setNewNumber("");
     });
