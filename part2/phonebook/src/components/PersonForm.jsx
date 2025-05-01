@@ -1,3 +1,5 @@
+import personService from "../services/persons";
+
 const PersonForm = ({
   newName,
   setNewName,
@@ -20,9 +22,11 @@ const PersonForm = ({
       return;
     }
 
-    setPersons(persons.concat(personObject));
-    setNewName("");
-    setNewNumber("");
+    personService.create(personObject).then((returnedPersons) => {
+      setPersons(persons.concat(returnedPersons));
+      setNewName("");
+      setNewNumber("");
+    });
   };
 
   const handleNameChange = (event) => {
