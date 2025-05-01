@@ -17,16 +17,12 @@ const App = () => {
   }, []);
 
   const deletePersonFromId = (id) => {
-    console.log("called")
     const person = persons.find((person) => person.id === id);
-    console.log(person)
 
     personService
       .deletePerson(person.id)
-      .then((returnedPerson) => {
-        setPersons(
-          persons.map((person) => (person.id === id ? returnedPerson : person))
-        );
+      .then(() => {
+        setPersons(persons.filter((person) => (person.id !== id)));
       })
       .catch(() => {
         alert(`${person.name} was already deleted from server`);
