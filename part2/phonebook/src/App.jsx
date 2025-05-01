@@ -18,16 +18,17 @@ const App = () => {
 
   const deletePersonFromId = (id) => {
     const person = persons.find((person) => person.id === id);
-
-    personService
-      .deletePerson(person.id)
-      .then(() => {
-        setPersons(persons.filter((person) => (person.id !== id)));
-      })
-      .catch(() => {
-        alert(`${person.name} was already deleted from server`);
-        setPersons(persons.filter((person) => person.id !== id));
-      });
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personService
+        .deletePerson(person.id)
+        .then(() => {
+          setPersons(persons.filter((person) => person.id !== id));
+        })
+        .catch(() => {
+          alert(`${person.name} was already deleted from server`);
+          setPersons(persons.filter((person) => person.id !== id));
+        });
+    }
   };
 
   const personsToShow = search
