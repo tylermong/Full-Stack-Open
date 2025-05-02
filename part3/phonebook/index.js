@@ -27,6 +27,30 @@ let persons = [
   },
 ];
 
+// add new people
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+
+  if (!body.name) {
+    return response.status(400).json({ error: "name missing" });
+  }
+
+  if (!body.number) {
+    return response.status(400).json({ error: "number missing" });
+  }
+
+  const id = Math.floor(Math.random() * 100000 + 1);
+  const newPerson = {
+    id: id,
+    name: body.name,
+    number: body.number,
+  };
+
+  persons = persons.concat(newPerson);
+
+  response.json(persons);
+});
+
 // get all people
 app.get("/api/persons", (request, response) => {
   response.json(persons);
