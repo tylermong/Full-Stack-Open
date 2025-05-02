@@ -44,6 +44,14 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
+// delete person from id
+app.delete("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  persons = persons.filter((person) => person.id !== id);
+
+  response.status(204).end();
+});
+
 // get phonebook info
 app.get("/info", (request, response) => {
   const currentTime = new Date();
