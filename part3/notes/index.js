@@ -32,6 +32,7 @@ const requestLogger = (request, response, next) => {
 app.use(express.json());
 app.use(requestLogger);
 app.use(cors());
+app.use(express.static("dist"));
 
 // home page
 app.get("/", (request, response) => {
