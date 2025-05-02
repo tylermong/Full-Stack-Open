@@ -1,7 +1,6 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
-
-app.use(express.json());
 
 // people db
 let persons = [
@@ -27,8 +26,13 @@ let persons = [
   },
 ];
 
+app.use(express.json());
+app.use(morgan("tiny"));
+
+const postMorgan = morgan(':method :url :status :res[content-length] - :response-time ms')
+
 // add new people
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", postMorgan, (request, response) => {
   const body = request.body;
 
   if (!body.name) {
